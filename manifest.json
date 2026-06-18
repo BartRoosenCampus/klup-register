@@ -13,7 +13,7 @@
       "sizes": "512x512"
     }
   ],
-  "start_url": "/",
+  "start_url": "https://bartroosengithub.io/klup-register",
   "background_color": "#000000",
   "theme_color": "#0078D4",
   "display": "standalone",
