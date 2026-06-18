@@ -1,0 +1,22 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-size: 16px;
+    font-family: Monospaced, Menlo, Monaco, Consolas, 'Courier New', monospace;
+}
+
+body {
+    background-color: black;
+    color: whitesmoke;
+}
+
+.product {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr;
+}
+
+.product div {
+    padding: .5rem 0 .5rem .5rem;
+    outline: 1px solid white;
+}
