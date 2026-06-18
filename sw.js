@@ -1,9 +1,10 @@
 "use strict";const CACHE_NAME = 'v1_cache';
 const ASSETS_TO_CACHE = [
-    'index.html',
-    'css/main.css',
-    'js/app.js',
-    'images/logo.png'
+    '/',
+    '/index.html',
+    '/css/main.css',
+    '/js/app.js',
+    '/images/logo.png'
 ];
 
 // Install Event: Cache core assets
