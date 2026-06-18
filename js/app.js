@@ -25,34 +25,37 @@ const products = [
     new Product("Cervela", 2.00),
 ];
 
-for (const [key, product] of products.entries()) {
-    const div = document.createElement("div");
-    div.classList.add("product");
-    const left = document.createElement("div");
-    const center = document.createElement("div");
-    const right = document.createElement("div");
+drawTable(products);
 
-    left.dataset.id = `product_${key}`;
-    right.id = `product_${key}`;
-    left.innerText = product.getName();
+function drawTable(products) {
+    keyboard.innerHTML = ``;
 
-    left.addEventListener("click", () => {
-        const element = document.getElementById(left.dataset.id)
-        let amount = parseInt(element.innerText);
-        amount ++;
-        element.innerText = amount;
-    });
+    for (const product of products) {
+        const row = document.createElement("div");
+        row.classList.add("product");
+        const name = document.createElement("div");
+        const price = document.createElement("div");
+        const amount = document.createElement("div");
+        const total = document.createElement("div");
 
-    right.addEventListener("click", () => {
-        let amount = parseInt(right.innerText);
-        if (0 !== amount) amount --;
-        right.innerText = amount;
-    });
+        name.innerText = product.getName();
+        name.addEventListener("click", () => {
+            product.add();
+            drawTable(products);
+        });
 
-    center.innerText = `€ ${product.getPrice()}`;
-    right.innerText = 0;
-    div.appendChild(left);
-    div.appendChild(center);
-    div.appendChild(right);
-    keyboard.append(div);
+        amount.addEventListener("click", () => {
+            product.subtract();
+            drawTable(products);
+        });
+
+        price.innerText = `€ ${product.getPrice()}`;
+        amount.innerText = product.getAmount();
+        total.innerText = `€ ${product.getTotal()}`;
+        row.appendChild(name);
+        row.appendChild(price);
+        row.appendChild(amount);
+        row.appendChild(total);
+        keyboard.append(row);
+    }
 }
