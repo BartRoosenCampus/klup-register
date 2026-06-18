@@ -15,13 +15,14 @@ const overview = document.getElementById("overview");
 const products = [
     new Product("Stella", 2.50),
     new Product("Hoegaarden", 2.50),
-    new Product("Coka Cola", 2.00),
+    new Product("Coca Cola", 2.00),
     new Product("Cola zero", 2.00),
     new Product("Water", 2.00),
     new Product("Bruiswater", 2.00),
     new Product("Koffie", 2.00),
     new Product("Thee", 2.00),
     new Product("Crock Monseigneur", 2.00),
+    new Product("Cervela", 2.00),
 ];
 
 for (const [key, product] of products.entries()) {
