@@ -7,7 +7,7 @@
 }
 
 body {
-    background-color: black;
+    background-color: #000000;
     color: whitesmoke;
 }
 
@@ -18,5 +18,14 @@ body {
 
 .product div {
     padding: 1rem 0 1rem .5rem;
-    outline: 1px solid white;
+    outline: 1px solid #666666;
+}
+
+.overviewRow {
+    padding: 0 1rem;
+}
+
+.totalRow {
+    border-top: 2px solid whitesmoke;
+    font-size: 1.2rem;
 }

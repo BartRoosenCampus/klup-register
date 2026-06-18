@@ -42,11 +42,13 @@ function drawTable(products) {
         name.addEventListener("click", () => {
             product.add();
             drawTable(products);
+            createOverview();
         });
 
         amount.addEventListener("click", () => {
             product.subtract();
             drawTable(products);
+            createOverview();
         });
 
         price.innerText = `€ ${product.getPrice()}`;
@@ -58,4 +60,23 @@ function drawTable(products) {
         row.appendChild(total);
         keyboard.append(row);
     }
+}
+
+function createOverview() {
+    overview.innerHTML = ``;
+    let grandTotal = 0.00;
+    for (const product of products) {
+        if (0 !== product.getAmount()) {
+            grandTotal += parseFloat(product.getTotal());
+            const row = document.createElement("div");
+            row.innerText = `${product.getAmount()} x ${product.getName()} = ${product.getTotal()}`;
+            row.classList.add("overviewRow")
+            overview.append(row);
+        }
+    }
+    const row = document.createElement("div");
+    row.classList.add("totalRow");
+    row.classList.add("overviewRow");
+    row.innerText = `Totaal: ${grandTotal.toFixed(2)}`;
+    overview.append(row);
 }
