@@ -11,9 +11,35 @@ body {
     color: whitesmoke;
 }
 
+#dashboard {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    height: 88px;
+    padding: 20px;
+    background-color: #666666;
+    text-align: center;
+}
+
+#overview, #keyboard {
+    margin-top: 88px;
+}
+
+.views {
+    display: none;
+}
+
+.invisible-button {
+    margin-left: 2rem;
+    margin-right: 2rem;
+    background-color: transparent;
+    border: none;
+    color: whitesmoke;
+}
+
 .product {
     display: grid;
-    grid-template-columns: 2fr 1fr 1fr 1fr;
+    grid-template-columns: 2fr 1fr 1fr;
 }
 
 .product div {
@@ -22,7 +48,9 @@ body {
 }
 
 .overviewRow {
-    padding: 0 1rem;
+    padding: .3rem;
+    display: grid;
+    grid-template-columns: 3fr 1fr;
 }
 
 .totalRow {

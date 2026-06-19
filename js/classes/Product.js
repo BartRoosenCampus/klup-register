@@ -1,11 +1,11 @@
 "use strict";
 
 export class Product {
-    constructor(name, price) {
+    constructor(name, price, amount = 0, total = 0) {
         this.name = name;
         this.price = price;
-        this.amount = 0
-        this.total = 0;
+        this.amount = amount;
+        this.total = total;
     }
 
     getName() {

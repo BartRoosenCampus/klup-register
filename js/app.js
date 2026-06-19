@@ -1,5 +1,6 @@
 "use strict";
 import {Product} from "./classes/Product.js";
+import {Storage} from "./classes/Storage.js";
 
 if ('serviceWorker' in navigator) {
     window.addEventListener('load', () => {
@@ -11,21 +12,54 @@ if ('serviceWorker' in navigator) {
 
 const keyboard = document.getElementById("keyboard");
 const overview = document.getElementById("overview");
+const btnShowOverview = document.getElementById("show-overview");
+const btnShowMenu = document.getElementById("show-menu");
+const btnReset = document.getElementById("reset");
 
-const products = [
-    new Product("Stella", 2.50),
-    new Product("Hoegaarden", 2.50),
-    new Product("Coca Cola", 2.00),
-    new Product("Cola zero", 2.00),
-    new Product("Water", 2.00),
-    new Product("Bruiswater", 2.00),
-    new Product("Koffie", 2.00),
-    new Product("Thee", 2.00),
-    new Product("Crock Monseigneur", 2.00),
-    new Product("Cervela", 2.00),
-];
+const storage = new Storage();
+btnShowOverview.addEventListener("click", () => {
+    toggleView("overview");
+});
+btnShowMenu.addEventListener("click", () => {
+    toggleView("keyboard");
+});
+
+btnReset.addEventListener("click", () => {
+    storage.reset();
+});
+
+
+
+let products = storage.get();
+
+if (null === products) {
+    products = [
+        new Product("Stella", 2.50),
+        new Product("Hoegaarden", 2.50),
+        new Product("Coca Cola", 2.00),
+        new Product("Cola zero", 2.00),
+        new Product("Fanta Lemon", 2.00),
+        new Product("Fanta Orange", 2.00),
+        new Product("Shweppes tonic", 2.00),
+        new Product("Shweppes agrum", 2.00),
+        new Product("Ice tea", 2.00),
+        new Product("Ice tea peche", 2.00),
+        new Product("Rode wijn", 3.00),
+        new Product("Witte wijn", 3.00),
+        new Product("Rose wijn", 3.00),
+        new Product("Cava", 6.00),
+        new Product("Water", 2.00),
+        new Product("Bruiswater", 2.00),
+        new Product("Koffie", 2.00),
+        new Product("Thee", 2.00),
+        new Product("Crock Monseigneur", 2.00),
+        new Product("Cervela", 2.00),
+    ];
+}
 
 drawTable(products);
+createOverview();
+toggleView("keyboard")
 
 function drawTable(products) {
     keyboard.innerHTML = ``;
@@ -36,7 +70,6 @@ function drawTable(products) {
         const name = document.createElement("div");
         const price = document.createElement("div");
         const amount = document.createElement("div");
-        const total = document.createElement("div");
 
         name.innerText = product.getName();
         name.addEventListener("click", () => {
@@ -53,13 +86,12 @@ function drawTable(products) {
 
         price.innerText = `€ ${product.getPrice()}`;
         amount.innerText = product.getAmount();
-        total.innerText = `€ ${product.getTotal()}`;
         row.appendChild(name);
         row.appendChild(price);
         row.appendChild(amount);
-        row.appendChild(total);
         keyboard.append(row);
     }
+    storage.set(products);
 }
 
 function createOverview() {
@@ -69,14 +101,42 @@ function createOverview() {
         if (0 !== product.getAmount()) {
             grandTotal += parseFloat(product.getTotal());
             const row = document.createElement("div");
-            row.innerText = `${product.getAmount()} x ${product.getName()} = ${product.getTotal()}`;
-            row.classList.add("overviewRow")
+            const left = document.createElement("div");
+            const right = document.createElement("div");
+            row.classList.add("overviewRow");
+            left.innerText = `${product.getAmount()} x ${product.getName()}`;
+            right.innerText = `= ${product.getTotal()}€`;
+            row.append(left);
+            row.append(right);
             overview.append(row);
         }
     }
     const row = document.createElement("div");
+    const left = document.createElement("div");
+    const right = document.createElement("div");
     row.classList.add("totalRow");
     row.classList.add("overviewRow");
-    row.innerText = `Totaal: ${grandTotal.toFixed(2)}`;
+    left.innerText = `Totaal:`;
+    right.innerText = `= ${grandTotal.toFixed(2)}€`;
+    row.append(left);
+    row.append(right);
     overview.append(row);
 }
+
+function toggleView(id) {
+    const views = document.getElementsByClassName("views");
+
+    for (const view of views) {
+        view.style.display = "none";
+    }
+
+    if (id === "overview") {
+        overview.style.display = "block";
+    }
+
+    if (id === "keyboard") {
+        keyboard.style.display = "block";
+    }
+}
+
+
