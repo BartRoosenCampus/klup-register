@@ -96,6 +96,7 @@ function drawTable(products) {
         const name = document.createElement("div");
         const price = document.createElement("div");
         const amount = document.createElement("div");
+        amount.classList.add("text-center");
 
         name.innerText = product.getName();
         name.addEventListener("click", () => {
