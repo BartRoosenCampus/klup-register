@@ -35,8 +35,7 @@ let products = storage.get();
 if (null === products) {
     products = [
         new Product("Coca Cola", 2.00),
-        new Product("Cola zero", 2.00),
-        new Product("Cola zero zero", 2.00),
+        new Product("Cola zero", 2.00),        
         new Product("Ice Tea", 2.00),
         new Product("Ice Tea zero", 2.00),
         new Product("Ice Tea green", 2.00),
